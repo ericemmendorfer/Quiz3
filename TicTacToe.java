@@ -30,28 +30,11 @@ int turn =0;
 do {
 	int p1Error=0;
 	int p2Error=0;
-
+	int choice = 0;
 	if (turn%2==0){ //X
-		try{
-		System.out.println("Player 1 enter the space number to choose:");
-		int box=sc.nextInt();
-		//check its a valid number
-		if (box<0||box>9){
-		throw new InvalidTurnException();
-		}
-		else if (box==0){
-			System.out.println("Player 1 forfiets");
-		}
-		//make sure it has not been used before 
-		for (int i=0; i<9; i++){
-			if (arr[i]==box){
-throw new InvalidTurnException();
-			}
-			else {
-			arr[turn]=box;
-
-			//x if odd o if even
-			board[box-1]='X';
+		System.out.print("Player 1 turn:");
+		choice = sc.nextInt();
+		isValid(choice, board, 1);
 			printBoard();
 			checkBoard();
 		}
@@ -64,27 +47,11 @@ catch (InvalidTurnException e){
 }
 else{//O
 	try{
-		System.out.println("Player 2 enter the space number to choose:");
-		int box=sc.nextInt();
-		//check its a valid number
-		if (box<0||box>9){
-		throw new InvalidTurnException();
-		}
-		else if (box==0){
-			System.out.println("Player 2 forfiets");
-		}
-		//make sure it has not been used before 
-		for (int i=0; i<9; i++){
-			if (arr[i]==box){
-throw new InvalidTurnException();
-			}
-			else {
-			arr[turn]=box;
-
-			//x if odd o if even
-			board[box-1]='O';
-			printBoard();
-			checkBoard();
+		System.out.print("Player 2 turn:");
+		choice = sc.nextInt();
+		isValid(choice, board, 2);
+		printBoard();
+		checkBoard();
 		}
 	}
 }
@@ -103,6 +70,31 @@ if (turn==10){
 
 		
 }
+		public static void isValid(int choice, int[] board, int player) {
+		//check its a valid number
+		char mark = 'O';
+		if(player == 1) 
+			mark = 'X';
+		if (choice<0||choice>9){
+			throw new InvalidTurnException();
+		}
+		else if (choice==0){
+			System.out.println("Player " + player + " forfiets");
+			System.exit(0);
+		}
+		//make sure it has not been used before 
+		for (int i=0; i<9; i++){
+			if (board[choice-1]=='X' || board[choice-1] == 'O')
+				throw new InvalidTurnException();
+			else
+				board[choice-1] = mark;
+			//x if odd o if even
+		}
+	}
+
+
+
+
 		public static void printBoard(int[] board) {
 		int count = 0;
 		for(int i = 0; i < 5; i++) {
