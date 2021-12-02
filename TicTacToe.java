@@ -25,48 +25,41 @@ public class TicTacToe {
 		int [] arr= {0,0,0,0,0,0,0,0,0};
 
 		
-public static void twoPlayer(Scanner sc){
-int turn =0;
-do {
-	int p1Error=0;
-	int p2Error=0;
-	int choice = 0;
-	if (turn%2==0){ //X
-		System.out.print("Player 1 turn:");
-		choice = sc.nextInt();
-		isValid(choice, board, 1);
-			printBoard();
-			checkBoard();
+public static void twoPlayer(Scanner sc, int[] board){
+		int turn = 0;
+		int choice = 0;
+		do {
+			try {
+				int p1Error=0;
+				int p2Error=0;
+				if (turn%2==0){ //X
+					System.out.print("Player 1 turn:");
+					choice = sc.nextInt();
+					if(!isValid(choice, board, 1));
+						throw new InvalidTurnException();
+					printBoard(board);
+					checkBoard(board);
+				}
+			}
+			catch (InvalidTurnException e){
+				System.out.println("Invalid entry for turn");
+			}
+			try {
+				System.out.print("Player 2 turn:");
+				choice = sc.nextInt();
+				isValid(choice, board, 2);
+				printBoard(board);
+				checkBoard(board);
+			}
+			catch (InvalidTurnException e){
+				System.out.println( "Invalid entry for turn");
+			}
+			turn+=1;
+		} while (turn<10);
+		if (turn==10){
+			System.out.println("Game over: It's a tie");
 		}
-	}
-}
-catch (InvalidTurnException e){
-		System.out.println( "Invalid entry for turn");
-	}
-		
-}
-else{//O
-	try{
-		System.out.print("Player 2 turn:");
-		choice = sc.nextInt();
-		isValid(choice, board, 2);
-		printBoard();
-		checkBoard();
 		}
-	}
-}
-catch (InvalidTurnException e){
-		System.out.println( "Invalid entry for turn");
-	}
-	
-}
-turn+=1;
-} while (turn<10);
-if (turn==10){
-	System.out.println("Game over: It's a tie");
-}
-}
-
 
 		
 }
