@@ -36,8 +36,11 @@ do {
 		System.out.println("Player 1 enter the space number to choose:");
 		int box=sc.nextInt();
 		//check its a valid number
-		if (box<1||box>9){
+		if (box<0||box>9){
 		throw new InvalidTurnException();
+		}
+		else if (box==0){
+			System.out.println("Player 1 forfiets");
 		}
 		//make sure it has not been used before 
 		for (int i=0; i<9; i++){
@@ -64,8 +67,11 @@ else{//O
 		System.out.println("Player 2 enter the space number to choose:");
 		int box=sc.nextInt();
 		//check its a valid number
-		if (box<1||box>9){
+		if (box<0||box>9){
 		throw new InvalidTurnException();
+		}
+		else if (box==0){
+			System.out.println("Player 2 forfiets");
 		}
 		//make sure it has not been used before 
 		for (int i=0; i<9; i++){
