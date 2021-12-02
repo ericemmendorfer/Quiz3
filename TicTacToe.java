@@ -90,7 +90,7 @@ catch (InvalidTurnException e){
 turn+=1;
 } while (turn<10);
 if (turn==10){
-	System.out.println("It's a tie");
+	System.out.println("Game over: It's a tie");
 }
 }
 
