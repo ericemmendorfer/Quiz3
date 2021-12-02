@@ -25,7 +25,7 @@ public class TicTacToe {
 		int [] arr= {0,0,0,0,0,0,0,0,0};
 
 		
-public static void twoPlayer(){
+public static void twoPlayer(Scanner sc){
 int turn =0;
 do {
 	int p1Error=0;
