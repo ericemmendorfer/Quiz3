@@ -33,7 +33,7 @@ do {
 
 	if (turn%2==0){ //X
 		try{
-		System.out.println("Enter the space number to choose:");
+		System.out.println("Player 1 enter the space number to choose:");
 		int box=sc.nextInt();
 		//check its a valid number
 		if (box<1||box>9){
@@ -61,7 +61,7 @@ catch (InvalidTurnException e){
 }
 else{//O
 	try{
-		System.out.println("Enter the space number to choose:");
+		System.out.println("Player 2 enter the space number to choose:");
 		int box=sc.nextInt();
 		//check its a valid number
 		if (box<1||box>9){
