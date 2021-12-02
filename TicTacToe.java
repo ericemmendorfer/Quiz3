@@ -26,29 +26,29 @@ public class TicTacToe {
 
 		
 public static void twoPlayer(){
-int turn =0
+int turn =0;
 do {
 	int p1Error=0;
 	int p2Error=0;
 
 	if (turn%2==0){ //X
 		try{
-		System.out.println("Enter the space number to choose:")
+		System.out.println("Enter the space number to choose:");
 		int box=sc.nextInt();
 		//check its a valid number
 		if (box<1||box>9){
-		throw new InvalidTurnException;
+		throw new InvalidTurnException();
 		}
 		//make sure it has not been used before 
 		for (int i=0; i<9; i++){
 			if (arr[i]==box){
-throw new InvalidTurnException;
+throw new InvalidTurnException();
 			}
 			else {
 			arr[turn]=box;
 
 			//x if odd o if even
-			board[box]='X'
+			board[box]='X';
 			printBoard();
 			checkBoard();
 		}
@@ -61,22 +61,22 @@ catch (InvalidTurnException e){
 }
 else{//O
 	try{
-		System.out.println("Enter the space number to choose:")
+		System.out.println("Enter the space number to choose:");
 		int box=sc.nextInt();
 		//check its a valid number
 		if (box<1||box>9){
-		throw new InvalidTurnException;
+		throw new InvalidTurnException();
 		}
 		//make sure it has not been used before 
 		for (int i=0; i<9; i++){
 			if (arr[i]==box){
-throw new InvalidTurnException;
+throw new InvalidTurnException();
 			}
 			else {
 			arr[turn]=box;
 
 			//x if odd o if even
-			board[box]='O'
+			board[box]='O';
 			printBoard();
 			checkBoard();
 		}
@@ -87,10 +87,10 @@ catch (InvalidTurnException e){
 	}
 	
 }
-turn+=1
+turn+=1;
 } while (turn<10);
 if (turn==10){
-	System.out.println("It's a tie")
+	System.out.println("It's a tie");
 }
 }
 
