@@ -133,4 +133,169 @@ if (turn==10){
 			System.out.println("You win!");
 	}
 }
+public static int bestMove(int[board]){
+//top row
+	if (board[0]==board[1]=='O'&& board[2]==3){
+	return 2;
+	}
+	else if (board[0]==board[2]=='O'&& board[1]==2){
+	return 1;
+	}
+	else if (board[1]==board[2]=='O'&& board[0]==1){
+	return 0;
+	}
+//second row
+else if (board[3]==board[4]=='O'&& board[5]==6){
+	return 5;
+	}
+	else if (board[4]==board[5]=='O'&& board[3]==4){
+	return 3;
+	}
+	else if (board[3]==board[5]=='O'&& board[4]==5){
+	return 4;
+	}
+	//third row
+	else if (board[6]==board[7]=='O'&& board[8]==9){
+	return 8;
+	}
+	else if (board[7]==board[8]=='O'&& board[6]==7){
+	return 6;
+	}
+	else if (board[6]==board[8]=='O'&& board[7]==8){
+	return 7;
+	}
+	//first column
+	else if (board[3]==board[0]=='O'&& board[6]==7){
+	return 6;
+	}
+	else if (board[3]==board[6]=='O'&&board[0]==1){
+	return 0;
+	}
+	else if (board[0]==board[6]=='O'&& board[3]==4){
+	return 3;
+	}
+	//second column
+	else if (board[1]==board[4]=='O'&& board[7]==8){
+	return 7;
+	}
+	else if (board[1]==board[7]=='O'&& board[4]==5)){
+	return 4;
+	}
+	else if (board[4]==board[7]=='O'&& board[1]==2){
+	return 1;
+	}
+	//third column
+	else if (board[2]==board[5]=='O'&& board[8]==9){
+	return 8;
+	}
+	else if (board[5]==board[8]=='O'&& board[2]==3){
+	return 2;
+	}
+	else if (board[2]==board[8]=='O'&& board[5]==6){
+	return 5;
+	}
+	//diaganol 1
+	else if (board[0]==board[4]=='O'&& board[8]==9){
+	return 8;
+	}
+	else if (board[4]==board[8]=='O'&&board[0]==1){
+	return 0;
+	}
+	else if (board[0]==board[8]=='O'&& board[4]==5)){
+	return 4;
+	}
+		//diaganol 2
+
+	else if (board[2]==board[4]=='O'&& board[6]==7){
+	return 6;
+	}
+	else if (board[4]==board[6]=='O'&& board[2]==3){
+	return 2;
+	}
+	else if (board[2]==board[6]=='O'&& board[4]==5)){
+	return 4;
+	}
+
+//top row
+	else if (board[0]==board[1]=='X'&& board[2]==3){
+	return 2;
+	}
+	else if (board[0]==board[2]=='X'&& board[1]==2){
+	return 1;
+	}
+	else if (board[1]==board[2]=='X'&& board[0]==1){
+	return 0;
+	}
+//second row
+else if (board[3]==board[4]=='X'&& board[5]==6){
+	return 5;
+	}
+	else if (board[4]==board[5]=='X'&& board[3]==4){
+	return 3;
+	}
+	else if (board[3]==board[5]=='X'&& board[4]==5){
+	return 4;
+	}
+	//third row
+	else if (board[6]==board[7]=='X'&& board[8]==9){
+	return 8;
+	}
+	else if (board[7]==board[8]=='X'&& board[6]==7){
+	return 6;
+	}
+	else if (board[6]==board[8]=='X'&& board[7]==8){
+	return 7;
+	}
+	//first column
+	else if (board[3]==board[0]=='X'&& board[6]==7){
+	return 6;
+	}
+	else if (board[3]==board[6]=='X'&&board[0]==1){
+	return 0;
+	}
+	else if (board[0]==board[6]=='X'&& board[3]==4){
+	return 3;
+	}
+	//second column
+	else if (board[1]==board[4]=='X'&& board[7]==8){
+	return 7;
+	}
+	else if (board[1]==board[7]=='X'&& board[4]==5)){
+	return 4;
+	}
+	else if (board[4]==board[7]=='X'&& board[1]==2){
+	return 1;
+	}
+	//third column
+	else if (board[2]==board[5]=='X'&& board[8]==9){
+	return 8;
+	}
+	else if (board[5]==board[8]=='X'&& board[2]==3){
+	return 2;
+	}
+	else if (board[2]==board[8]=='X'&& board[5]==6){
+	return 5;
+	}
+	//diaganol 1
+	else if (board[0]==board[4]=='X'&& board[8]==9){
+	return 8;
+	}
+	else if (board[4]==board[8]=='X'&&board[0]==1){
+	return 0;
+	}
+	else if (board[0]==board[8]=='X'&& board[4]==5)){
+	return 4;
+	}
+		//diaganol 2
+
+	else if (board[2]==board[4]=='X'&& board[6]==7){
+	return 6;
+	}
+	else if (board[4]==board[6]=='X'&& board[2]==3){
+	return 2;
+	}
+	else if (board[2]==board[6]=='X'&& board[4]==5)){
+	return 4;
+	}
+}
 }
