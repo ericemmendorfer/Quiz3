@@ -27,7 +27,7 @@ public class TicTacToe {
 		
 public static void twoPlayer(){
 int turn =0
-while (turn<10){
+do {
 	int p1Error=0;
 	int p2Error=0;
 
@@ -88,7 +88,7 @@ catch (InvalidTurnException e){
 	
 }
 turn+=1
-}
+} while (turn<10);
 if (turn==10){
 	System.out.println("It's a tie")
 }
