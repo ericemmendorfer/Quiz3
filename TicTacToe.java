@@ -51,7 +51,7 @@ throw new InvalidTurnException();
 			arr[turn]=box;
 
 			//x if odd o if even
-			board[box]='X';
+			board[box0-1]='X';
 			printBoard();
 			checkBoard();
 		}
@@ -82,7 +82,7 @@ throw new InvalidTurnException();
 			arr[turn]=box;
 
 			//x if odd o if even
-			board[box]='O';
+			board[box-1]='O';
 			printBoard();
 			checkBoard();
 		}
