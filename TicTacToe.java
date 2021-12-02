@@ -49,6 +49,8 @@ throw new InvalidTurnException;
 
 			//x if odd o if even
 			board[box]='X'
+			printBoard();
+			checkBoard();
 		}
 	}
 }
@@ -74,7 +76,9 @@ throw new InvalidTurnException;
 			arr[turn]=box;
 
 			//x if odd o if even
-			board[box]='X'
+			board[box]='O'
+			printBoard();
+			checkBoard();
 		}
 	}
 }
@@ -112,4 +116,30 @@ if (turn==10){
 			}
 		}
 	}
+	public static String checkBoard(){	
+if ( board[0]==board[1]==board[2]){
+	System.out.println("You win!");
+}
+else if ( board[3]==board[4]==board[5]){
+	System.out.println("You win!");
+}
+else if ( board[6]==board[7]==board[8]){
+	System.out.println("You win!");
+}
+else if ( board[0]==board[3]==board[6]){
+	System.out.println("You win!");
+}
+else if ( board[1]==board[4]==board[7]){
+	System.out.println("You win!");
+}
+else if ( board[2]==board[5]==board[8]){
+	System.out.println("You win!");
+}
+else if ( board[0]==board[4]==board[8]){
+	System.out.println("You win!");
+}
+else if ( board[2]==board[4]==board[6]){
+	System.out.println("You win!");
+}
+}
 }
