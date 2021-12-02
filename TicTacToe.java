@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class TicTacToe {
 	public  static void main(String[] args) {
-		int [][] board= {{1,2,3},{4,5,6},{7,8,9}};
+		int [] board= {1,2,3,4,5,6,7,8,9};
 		Scanner sc = new Scanner(System.in);
 		int play = 3;
 	do {
@@ -22,7 +22,8 @@ public class TicTacToe {
 		
 		//create board here and print 
 		
-		
+		int [] arr= {0,0,0,0,0,0,0,0,0};
+
 		//while statements to check game is not over
 while ( board[0][0]==board[0][1]==board[0][2]=false){
 while ( board[1][0]==board[1][1]==board[1][2]=false){
