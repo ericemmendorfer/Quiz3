@@ -14,7 +14,7 @@ public class TicTacToe {
 				System.exit(0);
 				break;
 			case 1: System.out.println("CPU"); break;
-			case 2: System.out.println("hi"); break;
+			case 2: System.out.println("Player 2"); break;
 			default:
 				System.out.println("Invalid input, please try again"); 
 		}
@@ -48,4 +48,23 @@ while ( board[0][2]==board[1][1]==board[2][0]=false){
 
 		
 }
+		public static void printBoard(int[] board) {
+		int count = 0;
+		for(int i = 0; i < 5; i++) {
+			if(i % 2 == 0) {
+				System.out.printf("%3d%2c%2d%2c%2d", board[count], '|', board[count+1], '|', board[count+2]);
+				System.out.println();
+				count += 3;
+			}
+			else {
+				for(int j = 0; j < 12; j++) {
+					if(j % 4 == 0 && j != 0) 
+						System.out.print('+');
+					else
+						System.out.print('-');
+				}
+				System.out.println();
+			}
+		}
+	}
 }
