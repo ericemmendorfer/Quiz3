@@ -24,27 +24,72 @@ public class TicTacToe {
 		
 		int [] arr= {0,0,0,0,0,0,0,0,0};
 
-		//while statements to check game is not over
-while ( board[0][0]==board[0][1]==board[0][2]=false){
-while ( board[1][0]==board[1][1]==board[1][2]=false){
-while ( board[2][0]==board[2][1]==board[2][2]=false){
-while ( board[0][0]==board[1][0]==board[2][0]=false){
-while ( board[0][1]==board[1][1]==board[2][1]=false){
-while ( board[0][2]==board[1][2]==board[2][2]=false){
-while ( board[0][0]==board[1][1]==board[2][2]=false){
-while ( board[0][2]==board[1][1]==board[2][0]=false){
-	
+		
+public static void twoPlayer(){
+int turn =0
+while (turn<10){
+	int p1Error=0;
+	int p2Error=0;
 
+	if (turn%2==0){ //X
+		try{
+		System.out.println("Enter the space number to choose:")
+		int box=sc.nextInt();
+		//check its a valid number
+		if (box<1||box>9){
+		throw new InvalidTurnException;
+		}
+		//make sure it has not been used before 
+		for (int i=0; i<9; i++){
+			if (arr[i]==box){
+throw new InvalidTurnException;
+			}
+			else {
+			arr[turn]=box;
+
+			//x if odd o if even
+			board[box]='X'
+		}
+	}
+}
+catch (InvalidTurnException e){
+		System.out.println( "Invalid entry for turn");
+	}
 		
 }
+else{//O
+	try{
+		System.out.println("Enter the space number to choose:")
+		int box=sc.nextInt();
+		//check its a valid number
+		if (box<1||box>9){
+		throw new InvalidTurnException;
+		}
+		//make sure it has not been used before 
+		for (int i=0; i<9; i++){
+			if (arr[i]==box){
+throw new InvalidTurnException;
+			}
+			else {
+			arr[turn]=box;
+
+			//x if odd o if even
+			board[box]='X'
+		}
+	}
 }
-}
-}
-}	
-}		
-}
-}
+catch (InvalidTurnException e){
+		System.out.println( "Invalid entry for turn");
+	}
 	
+}
+turn+=1
+}
+if (turn==10){
+	System.out.println("It's a tie")
+}
+}
+
 
 		
 }
