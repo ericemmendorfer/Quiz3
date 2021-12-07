@@ -299,5 +299,11 @@ else if (board[3]==board[4]&&board[4]=='X'&& board[5]=='6'){
 	else if (board[2]==board[6]&& board[2]=='X'&& board[4]=='5'){
 	return '5';
 	}
+	else{
+		for (int i=0; i<10;i++){
+			if (board[i]!='X'&&board[i]!='O'){
+				char x= (char)(i+48);
+				return x;
+			}
 }
 }
