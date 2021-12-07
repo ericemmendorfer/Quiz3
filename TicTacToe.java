@@ -37,34 +37,38 @@ public static void twoPlayer(Scanner sc, int[] board){
 				if (turn%2==0){ //X
 					System.out.print("Player 1 turn:");
 					choice = sc.nextInt();
-					if(!isValid(choice, board, 1));
+					if(!isValid(choice, board, 1))
 						throw new InvalidTurnException();
-					printBoard(board);
-					checkBoard(board);
 				}
 			}
 			catch (InvalidTurnException e){
 				System.out.println("Invalid entry for turn");
 			}
+			finally {
+				printBoard(board);
+				System.out.println(checkBoard((board)));
+			}
 			try {
 				System.out.print("Player 2 turn:");
 				choice = sc.nextInt();
-				isValid(choice, board, 2);
+				if(!isValid(choice, board, 2))
+					throw new InvalidTurnException();
 				printBoard(board);
 				checkBoard(board);
 			}
 			catch (InvalidTurnException e){
 				System.out.println( "Invalid entry for turn");
 			}
+			finally {
+				printBoard(board);
+				checkBoard(board);
+			}
 			turn+=1;
 		} while (turn<10);
 		if (turn==10){
 			System.out.println("Game over: It's a tie");
 		}
-		}
-
-		
-}
+	}
 		public static void isValid(int choice, int[] board, int player) {
 		//check its a valid number
 		char mark = 'O';
@@ -109,23 +113,26 @@ public static void twoPlayer(Scanner sc, int[] board){
 			}
 		}
 	}
-	public static String checkBoard(int[] board){	
+	public static boolean checkBoard(int[] board){	
+		boolean won = false;
 		if (board[0]==board[1] && board[0]==board[2])
-			System.out.println("You win!");
+			won = true;
 		else if ( board[3]==board[4] && board[4]==board[5])
-			System.out.println("You win!");
+			won = true;
 		else if ( board[6]==board[7] && board[6]==board[8])
-			System.out.println("You win!");
+			won = true;
 		else if ( board[0]==board[3] && board[0]==board[6])
-			System.out.println("You win!");
+			won = true;
 		else if ( board[1]==board[4] && board[1]==board[7])
-			System.out.println("You win!");
+			won = true;
 		else if ( board[2]==board[5] && board[2]==board[8])
-			System.out.println("You win!");
+			won = true;
 		else if ( board[0]==board[4] && board[0]==board[8])
-			System.out.println("You win!");
+			won = true;
 		else if ( board[2]==board[4] && board[2]==board[6])
-			System.out.println("You win!");
+			won = true;
+		return won;
+		
 	}
 }
 public static int bestMove(int[board]){
