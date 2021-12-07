@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class TicTacToe {
 	public  static void main(String[] args) {
-		int [] board= {1,2,3,4,5,6,7,8,9};
+		char [] board= {'1','2','3','4','5','6','7','8','9'};
 		Scanner sc = new Scanner(System.in);
 		int play = 3;
 	do {
@@ -23,6 +23,8 @@ public class TicTacToe {
 		//create board here and print 
 		
 		int [] arr= {0,0,0,0,0,0,0,0,0};
+	}
+
 
 		
 public static void twoPlayer(Scanner sc, int[] board){
