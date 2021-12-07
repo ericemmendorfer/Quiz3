@@ -29,20 +29,24 @@ public class TicTacToe {
 		int [] arr= {0,0,0,0,0,0,0,0,0};
 	}
 
-
-	public static void twoPlayer(Scanner sc, char[] board, boolean p2First){
+public static void twoPlayer(Scanner sc, char[] board, boolean p2First, int errorCounter){
 		int choice = 0;
 		while(turn < 9) {
+			//Checks if player 2 goes first or not
 			if(!p2First) {
-				int threeInARow = 0;
 				try {
-					if(p1Errors >= 5) {
+					//Checks if the player made too many errors
+					if(p1Errors >= 5 && errorCounter >= 3) {
 						System.out.println("Player 1 forfeits the game due to reaching maximum incorrect entries!");
 						System.exit(0);
 					}
-					if (turn%2==0){ //X
+					if (turn%2==0){ //Player's 1 Turn
 						System.out.print("Player 1 turn:");
 						choice = sc.nextInt();
+						if(choice == 0) {
+							System.out.println("Player 1 forfeits by entering 0!");
+							System.exit(0);
+						}
 						if(!isValid(choice, board, 1))
 							throw new InvalidTurnException();
 					}
@@ -50,17 +54,17 @@ public class TicTacToe {
 				catch (InvalidTurnException e){
 					System.out.println("Invalid entry for turn, please try again.");
 					p1Errors++;
-					twoPlayer(sc, board, false);
-					threeInARow++;
+					twoPlayer(sc, board, false, errorCounter + 1);
 				}
 				finally {
+					errorCounter = 0;
 					printBoard(board);
-					threeInARow = 0;
 					if(checkBoard(board)) {
 						System.out.println("Player 1 wins!");
 						System.exit(0);
 					}
 					turn++;
+					//Ends game in a tie
 					if(turn == 9)
 						break;
 				}
@@ -68,21 +72,27 @@ public class TicTacToe {
 			p2First = false;
 			try {
 				System.out.println();
-				if(p2Errors >= 5) {
+				//Checks if too many errors for Player 2
+				if(p2Errors >= 5 && errorCounter >= 3) {
 					System.out.println("Player 2 forfeits the game due to reaching maximum incorrect entries!");
 					System.exit(0);
 				}
 				System.out.print("Player 2 turn:");
 				choice = sc.nextInt();
+				if(choice == 0) {
+					System.out.println("Player 2 forfeits by entering 0!");
+					System.exit(0);
+				}
 				if(!isValid(choice, board, 2))
 					throw new InvalidTurnException();
 			}
 			catch (InvalidTurnException e){
 				System.out.println("Invalid entry for turn, please try again.");
 				p2Errors++;
-				twoPlayer(sc, board, true);
+				twoPlayer(sc, board, true, errorCounter+1);
 			}
 			finally {
+				errorCounter = 0;
 				printBoard(board);
 				if(checkBoard(board)) {
 					System.out.println("Player 2 wins!");
@@ -90,10 +100,8 @@ public class TicTacToe {
 				}
 				turn++;
 			}
-			System.out.println("turn " + turn);
 		}
 		System.out.println("Game over: It's a tie");
-	}
 		public static void printBoard(char[] board) {
 		int count = 0;
 		for(int i = 0; i < 5; i++) {
