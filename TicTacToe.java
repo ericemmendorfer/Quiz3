@@ -122,7 +122,7 @@ public static void twoPlayer(Scanner sc, char[] board, boolean p2First, int erro
 		}
 	}
 	
-public static void onePlayer(Scanner sc, char[] board, boolean p2First){
+public static void CPUGame(Scanner sc, char[] board, boolean p2First){
 		int choice = 0;
 		while(turn < 9) {
 			if(!p2First) {
