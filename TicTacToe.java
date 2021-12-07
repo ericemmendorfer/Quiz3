@@ -14,11 +14,11 @@ public class TicTacToe {
 		play= sc.nextInt();
 		switch(play) {
 			case 0: 
-				System.out.println("bye"); 
+				System.out.println("Goodbye!"); 
 				System.exit(0);
 				break;
-			case 1: System.out.println("CPU"); break;
-			case 2: System.out.println("Player 2"); break;
+			case 1: twoPlayer(sc, board, false, 0); break;
+			case 2: CPUGame(board, sc); break;
 			default:
 				System.out.println("Invalid input, please try again"); 
 		}
@@ -128,7 +128,7 @@ public static void CPUGame(Scanner sc, char[] board, boolean p2First){
 			if(!p2First) {
 				int threeInARow = 0;
 				try {
-					if(p1Errors >= 5 && errorCounter >= 3) {
+					if(p1Errors >= 5) {
 						System.out.println("Player 1 forfeits the game due to reaching maximum incorrect entries!");
 						System.exit(0);
 					}
