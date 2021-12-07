@@ -27,7 +27,7 @@ public class TicTacToe {
 
 
 		
-public static void twoPlayer(Scanner sc, int[] board){
+public static void twoPlayer(Scanner sc, char[] board){
 		int turn = 0;
 		int choice = 0;
 		do {
@@ -69,7 +69,7 @@ public static void twoPlayer(Scanner sc, int[] board){
 			System.out.println("Game over: It's a tie");
 		}
 	}
-		public static void isValid(int choice, int[] board, int player) {
+		public static void isValid(int choice, char[] board, int player) {
 		//check its a valid number
 		char mark = 'O';
 		if(player == 1) 
@@ -94,7 +94,7 @@ public static void twoPlayer(Scanner sc, int[] board){
 
 
 
-		public static void printBoard(int[] board) {
+		public static void printBoard(char[] board) {
 		int count = 0;
 		for(int i = 0; i < 5; i++) {
 			if(i % 2 == 0) {
@@ -113,7 +113,7 @@ public static void twoPlayer(Scanner sc, int[] board){
 			}
 		}
 	}
-	public static boolean checkBoard(int[] board){	
+	public static boolean checkBoard(char[] board){	
 		boolean won = false;
 		if (board[0]==board[1] && board[0]==board[2])
 			won = true;
@@ -135,7 +135,7 @@ public static void twoPlayer(Scanner sc, int[] board){
 		
 	}
 }
-public static int bestMove(int[]board){
+public static int bestMove(char[]board){
 //top row
 	if (board[0]==board[1]&&board[1]=='O'&& board[2]=='3'){
 	return '3';
