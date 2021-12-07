@@ -1,6 +1,10 @@
 import java.util.Scanner;
 
 public class TicTacToe {
+	public static int turn=0;
+	public static int p1Errors=0;
+	public static int p2Errors=0;
+
 	public  static void main(String[] args) {
 		char [] board= {'1','2','3','4','5','6','7','8','9'};
 		Scanner sc = new Scanner(System.in);
