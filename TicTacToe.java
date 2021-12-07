@@ -128,7 +128,7 @@ public static void CPUGame(Scanner sc, char[] board, boolean p2First){
 			if(!p2First) {
 				int threeInARow = 0;
 				try {
-					if(p1Errors >= 5) {
+					if(p1Errors >= 5 && errorCounter >= 3) {
 						System.out.println("Player 1 forfeits the game due to reaching maximum incorrect entries!");
 						System.exit(0);
 					}
