@@ -26,74 +26,70 @@ public class TicTacToe {
 	}
 
 
-		
-public static void twoPlayer(Scanner sc, char[] board){
-		int turn = 0;
+	public static void twoPlayer(Scanner sc, char[] board, boolean p2First){
 		int choice = 0;
-		do {
-			try {
-				int p1Error=0;
-				int p2Error=0;
-				if (turn%2==0){ //X
-					System.out.print("Player 1 turn:");
-					choice = sc.nextInt();
-					if(!isValid(choice, board, 1))
-						throw new InvalidTurnException();
+		while(turn < 9) {
+			if(!p2First) {
+				int threeInARow = 0;
+				try {
+					if(p1Errors >= 5) {
+						System.out.println("Player 1 forfeits the game due to reaching maximum incorrect entries!");
+						System.exit(0);
+					}
+					if (turn%2==0){ //X
+						System.out.print("Player 1 turn:");
+						choice = sc.nextInt();
+						if(!isValid(choice, board, 1))
+							throw new InvalidTurnException();
+					}
+				}
+				catch (InvalidTurnException e){
+					System.out.println("Invalid entry for turn, please try again.");
+					p1Errors++;
+					twoPlayer(sc, board, false);
+					threeInARow++;
+				}
+				finally {
+					printBoard(board);
+					threeInARow = 0;
+					if(checkBoard(board)) {
+						System.out.println("Player 1 wins!");
+						System.exit(0);
+					}
+					turn++;
+					if(turn == 9)
+						break;
 				}
 			}
-			catch (InvalidTurnException e){
-				System.out.println("Invalid entry for turn");
-			}
-			finally {
-				printBoard(board);
-				System.out.println(checkBoard((board)));
-			}
+			p2First = false;
 			try {
+				System.out.println();
+				if(p2Errors >= 5) {
+					System.out.println("Player 2 forfeits the game due to reaching maximum incorrect entries!");
+					System.exit(0);
+				}
 				System.out.print("Player 2 turn:");
 				choice = sc.nextInt();
 				if(!isValid(choice, board, 2))
 					throw new InvalidTurnException();
-				printBoard(board);
-				checkBoard(board);
 			}
 			catch (InvalidTurnException e){
-				System.out.println( "Invalid entry for turn");
+				System.out.println("Invalid entry for turn, please try again.");
+				p2Errors++;
+				twoPlayer(sc, board, true);
 			}
 			finally {
 				printBoard(board);
-				checkBoard(board);
+				if(checkBoard(board)) {
+					System.out.println("Player 2 wins!");
+					System.exit(0);
+				}
+				turn++;
 			}
-			turn+=1;
-		} while (turn<10);
-		if (turn==10){
-			System.out.println("Game over: It's a tie");
+			System.out.println("turn " + turn);
 		}
+		System.out.println("Game over: It's a tie");
 	}
-		public static void isValid(int choice, char[] board, int player) {
-		//check its a valid number
-		char mark = 'O';
-		if(player == 1) 
-			mark = 'X';
-		if (choice<0||choice>9){
-			throw new InvalidTurnException();
-		}
-		else if (choice==0){
-			System.out.println("Player " + player + " forfiets");
-			System.exit(0);
-		}
-		//make sure it has not been used before 
-		for (int i=0; i<9; i++){
-			if (board[choice-1]=='X' || board[choice-1] == 'O')
-				throw new InvalidTurnException();
-			else
-				board[choice-1] = mark;
-			//x if odd o if even
-		}
-	}
-
-
-
-
 		public static void printBoard(char[] board) {
 		int count = 0;
 		for(int i = 0; i < 5; i++) {
