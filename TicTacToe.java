@@ -113,6 +113,66 @@ public class TicTacToe {
 			}
 		}
 	}
+	
+public static void onePlayer(Scanner sc, char[] board, boolean p2First){
+		int choice = 0;
+		while(turn < 9) {
+			if(!p2First) {
+				int threeInARow = 0;
+				try {
+					if(p1Errors >= 5) {
+						System.out.println("Player 1 forfeits the game due to reaching maximum incorrect entries!");
+						System.exit(0);
+					}
+					if (turn%2==0){ //X
+						System.out.print("Player 1 turn:");
+						choice = sc.nextInt();
+						if(!isValid(choice, board, 1))
+							throw new InvalidTurnException();
+					}
+				}
+				catch (InvalidTurnException e){
+					System.out.println("Invalid entry for turn, please try again.");
+					p1Errors++;
+					twoPlayer(sc, board, false);
+					threeInARow++;
+				}
+				finally {
+					printBoard(board);
+					threeInARow = 0;
+					if(checkBoard(board)) {
+						System.out.println("Player 1 wins!");
+						System.exit(0);
+					}
+					turn++;
+					if(turn == 9)
+						break;
+				}
+			}
+			p2First = false;
+			try {
+				System.out.println();
+				
+				choice = bestMove(board);
+				if(!isValid(choice, board, 2))
+					throw new InvalidTurnException();
+			}
+			catch (InvalidTurnException e){
+				System.out.println("Invalid entry for turn, please try again.");
+				p2Errors++;
+				twoPlayer(sc, board, true);
+			}
+			finally {
+				printBoard(board);
+				if(checkBoard(board)) {
+					System.out.println("Computer wins!");
+					System.exit(0);
+				}
+				turn++;
+			}
+			System.out.println("turn " + turn);
+		}
+		
 	public static boolean checkBoard(char[] board){	
 		boolean won = false;
 		if (board[0]==board[1] && board[0]==board[2])
