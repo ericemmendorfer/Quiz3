@@ -5,7 +5,7 @@ public class TicTacToe {
 	public static int p1Errors = 0;
 	public static int p2Errors = 0;
 	public static int p1Assist = 0;
-	public static int p1Assist = 0;
+	public static int p2Assist = 0;
 
 
 	public static void main(String[] args) {
@@ -76,10 +76,10 @@ public class TicTacToe {
 							p1Assist++;
 							}
 							else if(p1Assist==2){
-								System.out.println("Player 1 has reached max CPU assist please try again.")
+								System.out.println("Player 1 has reached max CPU assist please try again.");
 						}
 						else{
-						choice = Integer.parseInt(help)();
+						choice = Integer.parseInt(help);
 						}
 						if(choice == 0) {
 							System.out.println("Player 1 forfeits by entering 0!");
@@ -89,6 +89,7 @@ public class TicTacToe {
 							throw new InvalidTurnException();
 					}
 				}
+			}
 				catch (InvalidTurnException e){
 					System.out.println("Invalid entry for turn, please try again.");
 					p1Errors++;
@@ -128,10 +129,11 @@ public class TicTacToe {
 							p2Assist++;
 							}
 							else if(p2Assist==2){
-								System.out.println("Player 2 has reached max CPU assist please try again.")
+								System.out.println("Player 2 has reached max CPU assist please try again.");
 						}
+					}
 						else{
-						choice = Integer.parseInt(help)();
+						choice = Integer.parseInt(help);
 						}
 				}
 				if(choice == 0) {
@@ -377,5 +379,3 @@ public class TicTacToe {
 			return 0;
 	}
 }
-
-	
