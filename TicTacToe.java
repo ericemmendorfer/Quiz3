@@ -132,7 +132,7 @@ public class TicTacToe {
 				return choice;
 				}
 			}
-		}
+		
 	//Checks if there is a winning match
 	public static boolean checkBoard(char[] board){	
 		boolean won = false;
@@ -343,8 +343,9 @@ public class TicTacToe {
 			}
 			else{
 				for (int j=0; j<9;){
-					if (board[j]=='X'||board[j]=='O')
+					if (board[j]=='X'||board[j]=='O'){
 						j++;
+					}
 					else
 						return j+1;
 				}
