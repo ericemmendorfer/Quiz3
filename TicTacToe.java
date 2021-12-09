@@ -1,12 +1,11 @@
 import java.util.Scanner;
-
+//Added CPU Assist to 2 Player
 public class TicTacToe {
 	public static int turn = 0;
 	public static int p1Errors = 0;
 	public static int p2Errors = 0;
 	public static int p1Assist = 0;
 	public static int p2Assist = 0;
-
 
 	public static void main(String[] args) {
 		char [] board= {'1', '2', '3', '4', '5', '6','7','8','9'};
@@ -49,79 +48,94 @@ public class TicTacToe {
 			}
 		}
 	}
-	//Central method for game
+	//Central method for game, handles turns
 	public static void twoPlayer(Scanner sc, char[] board, boolean p2First, int errorCounter, boolean isCPU){
 		int choice = 0;
 		boolean isComputer = false;
-		String player2 = "Player 2";
 		if(isCPU) {
 			isComputer = true;
-			player2 = "CPU";
 		}
 		while(turn < 9) {
 			if(!p2First) {
 				choice = playerChoice(1, errorCounter, board, sc, isComputer);
+				checkChoice(1, choice, isComputer, board);
+				turn++;
+				if(turn == 9)
+					break;
 			}
 			p2First = false;
 			choice = playerChoice(2, errorCounter, board, sc, isComputer);
+			checkChoice(2, choice, isComputer, board);
 			turn++;
 		}
 		System.out.println("Game over: It's a tie");
+		printBoard(board);
+		System.exit(0);
 	}
+	//Checks if someone won
 	public static void checkChoice(int pNumber, int choice, boolean isComputer, char[] board) {
-		if(!isComputer)
+		if(!isComputer || pNumber != 1)
 			printBoard(board);
 		if(checkBoard(board)) {
 			System.out.println("Player " + pNumber + " wins!");
 			System.exit(0);
 		}
-		if(choice == 0) {
-			System.out.println("Player " + pNumber + " forfeits by entering 0!");
-			System.exit(0);
-		}
-		
 	}
+	//Returns player/CPU choice
 	public static int playerChoice(int pNumber, int errorCounter, char[] board, Scanner sc, boolean isComputer) {
 		int choice = 0;
 		int errors = 0;
 		int assists = 0;
+		String playerName = "";
 		if(pNumber == 1) {
 			errors = p1Errors;
 			assists = p1Assist;
+			playerName = "1";
 		}
 		else {
 			errors = p2Errors;
 			assists = p2Assist;
+			if(isComputer)
+				playerName = "CPU";
+			else
+				playerName = "2";
 		}
 			try {
 				//Checks if the player made too many errors
 				if(errors >= 5 && errorCounter >= 3) {
-					System.out.println("Player " + pNumber + " forfeits the game due to reaching maximum incorrect entries!");
+					System.out.println("Player " + playerName + " forfeits the game due to reaching maximum incorrect entries!");
 					System.exit(0);
 				}
-				if (turn%2==0){ //Player's 1 Turn
-					System.out.print("Player " + pNumber + " turn:");
+				if(isComputer && pNumber != 1) {
+					choice = bestMove(board);
+				}
+				//Asks for player input
+				else {
+					System.out.print("Player " + playerName + " turn:");
 					if(!isComputer)
-						System.out.print("enter 000 for CPU assist");
+						System.out.print(" (enter 000 for CPU assist)");
 					System.out.println();
 					String help=sc.next();
 					if (help.equals("000")){
 						if (assists<2) {
 							choice=bestMove(board);
-							assists++;
+							if(pNumber == 1) 
+								p1Assist++;
+							else
+								p2Assist++;
 						}
 						else if(assists==2){
-							System.out.println("Player " + pNumber + " has reached max CPU assist please try again.");
-							help = sc.next();
+							System.out.println("Player " + playerName + " has reached max CPU assist please try again.");
+							choice = sc.nextInt();
 						}
 					}
 					else {
 						choice = Integer.parseInt(help);
 					}
-					if(!isValid(choice, board, pNumber))
-						throw new InvalidTurnException();
+				}
+				if(!isValid(choice, board, pNumber))
+					throw new InvalidTurnException();
 			}
-		}
 			catch (InvalidTurnException e){
 				System.out.println("Invalid entry for turn, please try again.");
 				p1Errors++;
@@ -165,7 +179,7 @@ public class TicTacToe {
 			return false;
 		}
 		else if (choice==0){
-			System.out.println("Player " + player + " forfiets");
+			System.out.println("Player " + player + " forfeits");
 			System.exit(0);
 		}
 		//make sure it has not been used before 
