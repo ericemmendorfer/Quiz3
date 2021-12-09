@@ -59,107 +59,80 @@ public class TicTacToe {
 			player2 = "CPU";
 		}
 		while(turn < 9) {
-			//Checks if player 2 goes first or not
 			if(!p2First) {
-				try {
-					//Checks if the player made too many errors
-					if(p1Errors >= 5 && errorCounter >= 3) {
-						System.out.println("Player 1 forfeits the game due to reaching maximum incorrect entries!");
-						System.exit(0);
-					}
-					if (turn%2==0){ //Player's 1 Turn
-						System.out.print("Player 1 turn(enter 000 for computer assist:");
-						String help=sc.nextLine();
-						if (help=="000"){
-							if (p1Assist<2){
-						choice=bestMove(board);
-							p1Assist++;
-							}
-							else if(p1Assist==2){
-								System.out.println("Player 1 has reached max CPU assist please try again.");
-						}
-						else{
-						choice = Integer.parseInt(help);
-						}
-						if(choice == 0) {
-							System.out.println("Player 1 forfeits by entering 0!");
-							System.exit(0);
-						}
-						if(!isValid(choice, board, 1))
-							throw new InvalidTurnException();
-					}
-				}
-			}
-				catch (InvalidTurnException e){
-					System.out.println("Invalid entry for turn, please try again.");
-					p1Errors++;
-					twoPlayer(sc, board, false, errorCounter + 1, isComputer);
-				}
-				finally {
-					errorCounter = 0;
-					if(!isComputer)
-						printBoard(board);
-					if(checkBoard(board)) {
-						System.out.println("Player 1 wins!");
-						System.exit(0);
-					}
-					turn++;
-					//Ends game in a tie
-					if(turn == 9)
-						break;
-				}
+				choice = playerChoice(1, errorCounter, board, sc, isComputer);
 			}
 			p2First = false;
-			try {
-				System.out.println();
-				//Checks if too many errors for Player 2
-				if(p2Errors >= 5 && errorCounter >= 3) {
-					System.out.println("Player 2 forfeits the game due to reaching maximum incorrect entries!");
-					System.exit(0);
-				}
-				//Checks if it is a CPU Game
-				if(isComputer)
-					choice = bestMove(board);
-				else {
-					System.out.print("Player 2 turn(enter 000 for computer assist:");
-					String help=sc.nextLine();
-						if (help=="000"){
-							if (p2Assist<2){
-						choice=bestMove(board);
-							p2Assist++;
-							}
-							else if(p2Assist==2){
-								System.out.println("Player 2 has reached max CPU assist please try again.");
-						}
-					}
-						else{
-						choice = Integer.parseInt(help);
-						}
-				}
-				if(choice == 0) {
-					System.out.println("Player 2 forfeits by entering 0!");
-					System.exit(0);
-				}
-				if(!isValid(choice, board, 2))
-					throw new InvalidTurnException();
-			}
-			catch (InvalidTurnException e){
-				System.out.println("Invalid entry for turn, please try again.");
-				p2Errors++;
-				twoPlayer(sc, board, true, errorCounter+1, isComputer);
-			}
-			finally {
-				errorCounter = 0;
-				printBoard(board);
-				if(checkBoard(board)) {
-					System.out.println(player2 + " wins!");
-					System.exit(0);
-				}
-				turn++;
-			}
+			choice = playerChoice(2, errorCounter, board, sc, isComputer);
+			turn++;
 		}
 		System.out.println("Game over: It's a tie");
 	}
+	public static void checkChoice(int pNumber, int choice, boolean isComputer, char[] board) {
+		if(!isComputer)
+			printBoard(board);
+		if(checkBoard(board)) {
+			System.out.println("Player " + pNumber + " wins!");
+			System.exit(0);
+		}
+		if(choice == 0) {
+			System.out.println("Player " + pNumber + " forfeits by entering 0!");
+			System.exit(0);
+		}
+		
+	}
+	public static int playerChoice(int pNumber, int errorCounter, char[] board, Scanner sc, boolean isComputer) {
+		int choice = 0;
+		int errors = 0;
+		int assists = 0;
+		if(pNumber == 1) {
+			errors = p1Errors;
+			assists = p1Assist;
+		}
+		else {
+			errors = p2Errors;
+			assists = p2Assist;
+		}
+			try {
+				//Checks if the player made too many errors
+				if(errors >= 5 && errorCounter >= 3) {
+					System.out.println("Player " + pNumber + " forfeits the game due to reaching maximum incorrect entries!");
+					System.exit(0);
+				}
+				if (turn%2==0){ //Player's 1 Turn
+					System.out.print("Player " + pNumber + " turn:");
+					if(!isComputer)
+						System.out.print("enter 000 for CPU assist");
+					System.out.println();
+					String help=sc.next();
+					if (help.equals("000")){
+						if (assists<2) {
+							choice=bestMove(board);
+							assists++;
+						}
+						else if(assists==2){
+							System.out.println("Player " + pNumber + " has reached max CPU assist please try again.");
+							help = sc.next();
+						}
+					}
+					else {
+						choice = Integer.parseInt(help);
+					}
+					if(!isValid(choice, board, pNumber))
+						throw new InvalidTurnException();
+			}
+		}
+			catch (InvalidTurnException e){
+				System.out.println("Invalid entry for turn, please try again.");
+				p1Errors++;
+				playerChoice(pNumber, errorCounter+1, board, sc, isComputer);
+			}
+			finally {
+				errorCounter = 0;
+				return choice;
+				}
+			}
+		}
 	//Checks if there is a winning match
 	public static boolean checkBoard(char[] board){	
 		boolean won = false;
