@@ -4,6 +4,10 @@ public class TicTacToe {
 	public static int turn = 0;
 	public static int p1Errors = 0;
 	public static int p2Errors = 0;
+	public static int p1Assist = 0;
+	public static int p1Assist = 0;
+
+
 	public static void main(String[] args) {
 		char [] board= {'1', '2', '3', '4', '5', '6','7','8','9'};
 		turn = 0;
@@ -64,8 +68,19 @@ public class TicTacToe {
 						System.exit(0);
 					}
 					if (turn%2==0){ //Player's 1 Turn
-						System.out.print("Player 1 turn:");
-						choice = sc.nextInt();
+						System.out.print("Player 1 turn(enter 000 for computer assist:");
+						String help=sc.nextLine();
+						if (help=="000"){
+							if (p1Assist<2){
+						choice=bestMove(board);
+							p1Assist++;
+							}
+							else if(p1Assist==2){
+								System.out.println("Player 1 has reached max CPU assist please try again.")
+						}
+						else{
+						choice = Integer.parseInt(help)();
+						}
 						if(choice == 0) {
 							System.out.println("Player 1 forfeits by entering 0!");
 							System.exit(0);
@@ -105,8 +120,19 @@ public class TicTacToe {
 				if(isComputer)
 					choice = bestMove(board);
 				else {
-					System.out.print("Player 2 turn:");
-					choice = sc.nextInt();
+					System.out.print("Player 2 turn(enter 000 for computer assist:");
+					String help=sc.nextLine();
+						if (help=="000"){
+							if (p2Assist<2){
+						choice=bestMove(board);
+							p2Assist++;
+							}
+							else if(p2Assist==2){
+								System.out.println("Player 2 has reached max CPU assist please try again.")
+						}
+						else{
+						choice = Integer.parseInt(help)();
+						}
 				}
 				if(choice == 0) {
 					System.out.println("Player 2 forfeits by entering 0!");
